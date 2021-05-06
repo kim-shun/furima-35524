@@ -7,7 +7,7 @@ FactoryBot.define do
     first_name_kana { 'タロウ' }
     birth_date { Faker::Date.birthday } # Date.between(from: '2014-09-23', to: '2014-09-25')のような制限を設けるべき？
     email { Faker::Internet.free_email }
-    password = Faker::Internet.password(min_length: 6)
+    password = 'a1' + Faker::Internet.password(min_length: 6)
     password { password }
     password_confirmation { password }
   end

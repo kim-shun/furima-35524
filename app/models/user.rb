@@ -10,7 +10,6 @@ class User < ApplicationRecord
     validates :last_name
   end
 
-  validates :nickname, presence: true
   with_options presence: true, format: { with: /\A[ァ-ン]+\z/, message: '全角文字(カタカナ)を使用してください' } do
     validates :last_name_kana
     validates :first_name_kana
