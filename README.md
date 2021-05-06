@@ -51,6 +51,7 @@
 
 - belongs_to :user
 - belongs_to :item
+- has_one    :prefecture
 
 ## prefectures テーブル
 
@@ -59,11 +60,11 @@
 | postal_code   | integer    | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
-| address       | text       | null: false                    |
-| building      | text       | null: false                    |
+| address       | string     | null: false                    |
+| building      | string     |                                |
 | user          | references | null: false, foreign_key: true |
 | item          | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :order
+- belongs_to :order
