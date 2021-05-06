@@ -4,17 +4,16 @@
 
 ## users テーブル
 
-| Column                | Type   | Options     |
-| --------              | ------ | ----------- |
-| name                  | string | null: false |
-| email                 | string | null: false |
-| password              | string | null: false |
-| password_confirmation | string | null: false |
-| last_name             | string | null: false |
-| first_name            | string | null: false |
-| last_name_kana        | string | null: false |
-| first_name_kana       | string | null: false |
-| birth_date            | data   | null: false |
+| Column                | Type   | Options                   |
+| --------              | ------ | -----------               |
+| name                  | string | null: false               |
+| email                 | string | null: false, unique: true |
+| encrypted_password    | string | null: false               |
+| last_name             | string | null: false               |
+| first_name            | string | null: false               |
+| last_name_kana        | string | null: false               |
+| first_name_kana       | string | null: false               |
+| birth_date            | data   | null: false               |
 
 ### Association
 
@@ -31,13 +30,15 @@
 | sales_status        | text       | null: false                    |
 | price               | integer    | null: false                    |
 | shipping_fee_status | integer    | null: false                    |
+| prefecture          | string     | null: false                    |
+| scheduled-delivery  | data       | null: false                    |
 | user                | references | null: false, foreign_key: true |
-| order               | references | null: false, foreign_key: true |
+
 
 ### Association
 
 - belongs_to :user
-- belongs_to :order
+- has_one    :order
 
 ## orders テーブル
 
@@ -45,12 +46,11 @@
 | ------      | ---------- | ------------------------------ |
 | user        | references | null: false, foreign_key: true |
 | item        | references | null: false, foreign_key: true |
-| prefecture  | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_many   :items
+- belongs_to :item
 
 ## prefectures テーブル
 
