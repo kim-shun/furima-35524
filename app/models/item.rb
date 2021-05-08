@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :scheduled_delivery
   has_one_attached :image
-  
+
   with_options presence: true do
     validates :name
     validates :info
@@ -20,9 +20,9 @@ class Item < ApplicationRecord
     validates :scheduled_delivery_id
   end
 
-  validates :price, format: {with: /\A[0-9]+\z/, message: '半角数字を使用してください' }
-  validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
-  
+  validates :price, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+
   with_options numericality: { other_than: 1 } do
     validates :category_id
     validates :sales_status_id
@@ -30,5 +30,4 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :scheduled_delivery_id
   end
-  
 end
