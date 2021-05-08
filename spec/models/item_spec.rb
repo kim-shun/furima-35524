@@ -62,18 +62,53 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not a number")
       end
-      it '商品価格が300円〜9,999,999円でなければ登録できない' do
-        @item.price = '200'
+      it 'categoryidが1では登録できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+      it 'sales_status_idが1では登録できない' do
+        @item.sales_status_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Sales status must be other than 1")
+      end
+      it 'shipping_fee_status_idが1では登録できない' do
+        @item.shipping_fee_status_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping fee status must be other than 1")
+      end
+      it 'prefecture_idが1では登録できない' do
+        @item.prefecture_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
+      end
+      it 'scheduled_delivery_idが1では登録できない' do
+        @item.scheduled_delivery_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Scheduled delivery must be other than 1")
+      end
+      it '商品価格が299円以下では登録できない' do
+        @item.price = 200
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+      end
+      it '商品価格が10,000,000円以上では登録できない' do
+        @item.price = 10000100
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
       it '商品価格が半角英語では登録できない' do
         @item.price = 'test'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
-      it '商品価格が全角では登録できない' do
+      it '商品価格が全角文字では登録できない' do
         @item.price = 'あいうえお'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it '商品価格が全角数字では登録できない' do
+        @item.price = '１００００'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
