@@ -7,7 +7,12 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品情報の保存' do
     context '商品が登録できる場合' do
-      it '商品画像と商品名、商品の説明とカテゴリー、商品の状態と配送料の負担、発送元の地域と発送までの日数についての情報があれば登録できる' do
+      it '商品画像と商品名、商品の説明とカテゴリー、商品の状態と配送料の負担、発送元の地域と発送までの日数、販売価格についての情報があれば登録できる' do
+        expect(@item).to be_valid
+      end
+      it '販売価格が300円〜9,999,999円で半角数字であれば登録できる' do
+        @item.price = '1000'
+        @item.valid?
         expect(@item).to be_valid
       end
     end
@@ -52,11 +57,26 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank", "Scheduled delivery is not a number")
       end
-      #it 'ユーザーが紐付いていなければ登録できない' do
-        #@item.user = nil
-        #@item.valid?
-        #expect(@item.errors.full_messages).to include('User must exist')
-      #end
+      it '販売価格が300円〜9,999,999円でなければ登録できない' do
+        @item.price = '200'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+      end
+      it '販売価格が半角英語では登録できない' do
+        @item.price = 'test'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it '販売価格が全角では登録できない' do
+        @item.price = 'あいうえお'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it 'ユーザーが紐付いていなければ登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
+      end
     end
   end
 end
