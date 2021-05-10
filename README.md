@@ -51,9 +51,9 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one    :prefecture
+- has_one    :address
 
-## prefectures テーブル
+## addresses テーブル
 
 | Column        | Type       | Options                        |
 | -------       | ---------- | ------------------------------ |
