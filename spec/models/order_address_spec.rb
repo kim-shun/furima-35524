@@ -51,17 +51,17 @@ RSpec.describe OrderAddress, type: :model do
       it 'phone_numberが全角数字だと保存できないこと' do
         @order_address.phone_number = '２０００'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@order_address.errors.full_messages).to include("Phone number is not a number", "Phone number is too short (minimum is 11 characters)")
       end
       it 'phone_numberが11桁未満では保存できないこと' do
         @order_address.phone_number = '090'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@order_address.errors.full_messages).to include("Phone number is too short (minimum is 11 characters)")
       end
       it 'phone_numberが11桁を超過すると保存できないこと' do
         @order_address.phone_number = '0901111111111'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@order_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
       end
       it 'userが紐付いていないと保存できないこと' do
         @order_address.user_id = nil
