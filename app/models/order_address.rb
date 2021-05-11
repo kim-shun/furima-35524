@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :item_id, :user_id, :postal_code, :prefecture_id, :city, :address, :building
+  attr_accessor :item_id, :user_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number
 
   with_options presence: true do
     validates :item_id
@@ -9,9 +9,9 @@ class OrderAddress
     validates :prefecture_id
     validates :city
     validates :address
-    validates :phone_number, format: {with: /\A[0-9]{3}-[0-9]{4}-[0-9]{4}\z/}
+    validates :phone_number, format: {with: /\A[0-9]{11}\z/} #gsub(/-/,'')
   end
-  validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
+  validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"} 
 
   def save
     
