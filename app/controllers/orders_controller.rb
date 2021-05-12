@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order
+  before_action :move_to_index
   
   def index
     @order = Order.new
     @order_address = OrderAddress.new
-    move_to_index
   end
 
   def create
