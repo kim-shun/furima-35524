@@ -51,9 +51,9 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one    :prefecture
+- has_one    :address
 
-## prefectures テーブル
+## addresses テーブル
 
 | Column        | Type       | Options                        |
 | -------       | ---------- | ------------------------------ |
@@ -62,8 +62,10 @@
 | city          | string     | null: false                    |
 | address       | string     | null: false                    |
 | building      | string     |                                |
+| phone_number  | integer    | null: false                    |
 | user          | references | null: false, foreign_key: true |
 | item          | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
