@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
 
   def destroy
     if @item.destroy
-      redirect_to root_path 
+      redirect_to root_path
     else
       render :show
     end
@@ -54,8 +54,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    if current_user.id != @item.user.id || @item.order.present?
-      redirect_to action: :index
-    end
+    redirect_to action: :index if current_user.id != @item.user.id || @item.order.present?
   end
 end

@@ -52,29 +52,29 @@ RSpec.describe OrderAddress, type: :model do
       it 'phone_numberが全角数字だと保存できないこと' do
         @order_address.phone_number = '２０００００００００'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is not a number")
+        expect(@order_address.errors.full_messages).to include('Phone number is not a number')
       end
       it 'phone_numberが11桁未満では保存できないこと' do
         @order_address.phone_number = '090'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
+        expect(@order_address.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
       end
       it 'phone_numberが11桁を超過すると保存できないこと' do
         @order_address.phone_number = '0901111111111'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@order_address.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
       it 'phone_numberは英数字混同では保存できないこと' do
         @order_address.phone_number = '0901111aaaa'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include( "Phone number is not a number")
+        expect(@order_address.errors.full_messages).to include('Phone number is not a number')
       end
       it 'userが紐付いていないと保存できないこと' do
         @order_address.user_id = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("User can't be blank")
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
