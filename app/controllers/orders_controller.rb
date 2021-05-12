@@ -30,14 +30,8 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    if current_user.id == @item.user.id && @item.order.present?
-      redirect_to root_path
-    end
-    if current_user.id == @item.user.id && @item.order.nil?
-      redirect_to root_path
-    end
-    if current_user.id != @item.user.id && @item.order.present?
-      redirect_to root_path
+    if current_user.id == @item.user.id || @item.order.present?
+      redirect_to action: :index
     end
   end
 
