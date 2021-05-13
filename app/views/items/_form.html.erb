@@ -129,14 +129,14 @@
       </p>
     </div>
 
-    <% if controller_name == "items" && action_name == "new"%>
+    <% if controller_name == "items" && (action_name == "new" || action_name == "create") %>
     <div class="sell-btn-contents">
       <%= f.submit "出品する" ,class:"sell-btn" %>
       <%=link_to 'もどる', root_path, class:"back-btn" %>
     </div>
     <% end %>
 
-    <% if controller_name == "items" && action_name == "edit" %>
+    <% if controller_name == "items" && (action_name == "edit" || action_name == "update") %>
     <div class="sell-btn-contents">
       <%= f.submit "変更する" ,class:"sell-btn" %>
       <%=link_to 'もどる', "#", class:"back-btn" %>
