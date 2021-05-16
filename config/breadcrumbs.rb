@@ -12,6 +12,16 @@ crumb :items_new do
   parent :root
 end
 
+crumb :sessions do
+  link "ログインページ", user_session_path
+  parent :root
+end
+
+crumb :registrations do
+  link "新規登録ページ", new_user_registration_path
+  parent :root
+end
+
 
 # crumb :projects do
 #   link "Projects", projects_path
