@@ -2,9 +2,14 @@ crumb :root do
   link "Home", root_path
 end
 
-crumb :items_show do
-  link "商品詳細ページ", item_path
+crumb :items_show do |item|
+  link "商品詳細ページ", item_path(item)
   parent :root
+end
+
+crumb :orders do |item|
+  link "商品購入ページ", item_orders_path(item)
+  parent :items_show, item
 end
 
 crumb :items_new do
