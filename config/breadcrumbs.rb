@@ -12,6 +12,11 @@ crumb :orders do |item|
   parent :items_show, item
 end
 
+crumb :items_edit do |item|
+  link "商品編集ページ", edit_item_path(item)
+  parent :items_show, item
+end
+
 crumb :items_new do
   link "商品出品ページ", new_item_path
   parent :root
