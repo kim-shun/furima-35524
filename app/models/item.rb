@@ -6,14 +6,14 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee_status
   belongs_to :prefecture
   belongs_to :scheduled_delivery
-  has_one_attached :image
+  has_many_attached :images
   has_one :order
 
   with_options presence: true do
     validates :name
     validates :info
     validates :price
-    validates :image
+    validates :images
     validates :category_id
     validates :sales_status_id
     validates :shipping_fee_status_id

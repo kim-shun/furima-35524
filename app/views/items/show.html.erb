@@ -6,11 +6,14 @@
     <h2 class="name">
       <%= @item.name %>
     </h2>
-    <div class="item-img-content">
-      <%= image_tag @item.image ,class:"item-box-img" %>
+    <div class="item-img-content-show">
       
+      <% @item.images.each do |image| %>
+        <%= image_tag image, class:'item-box-img' %>
+      <% end %>
+
       <% if @item.order.present? %>
-      <div class="sold-out">
+      <div class="sold-out-show">
         <span>Sold Out!!</span>
       </div>
       <% end %>
