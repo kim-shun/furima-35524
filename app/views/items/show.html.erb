@@ -100,9 +100,9 @@
       <div id='comments'>
         <% @comments.reverse_each do |comment| %>
           <p>
-          <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
-          <%= comment.text %>
-        </p>
+            <strong><%= comment.user.nickname %>：</strong>
+            <%= comment.text %>
+          </p>
         <% end %>
       </div>
     

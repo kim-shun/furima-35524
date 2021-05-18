@@ -199,11 +199,11 @@
 
 #comments {
   width: 100%;
-  height: 100px;
+  height: 200px;
   padding: 10px;
   border: solid 2px #dedede;
   resize: none;
-  /*text-overflow: ellipsis;*/
+  overflow: scroll;
 }
 
 .comment-flag {
