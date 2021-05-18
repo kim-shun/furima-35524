@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = Comment.all
+    @comments = @item.comments.includes(:user)
   end
 
   def destroy

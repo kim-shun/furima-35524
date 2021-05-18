@@ -87,7 +87,7 @@
   <%# /商品の概要 %>
     <div class="comment-box">
     <% if user_signed_in?%>
-      <%= form_with model: @comment, url: item_comments_path(@item.id)  do |f| %>
+      <%= form_with model: [@item, @comment] do |f| %>
         <%= f.text_field :text, id: "comment-text" %>
         <p class="comment-warn">
           相手のことを考え丁寧なコメントを心がけましょう。
@@ -99,7 +99,10 @@
     <% end %>
       <div id='comments'>
         <% @comments.reverse_each do |comment| %>
-          <p><%= comment.text %></p>
+          <p>
+          <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
+          <%= comment.text %>
+        </p>
         <% end %>
       </div>
     

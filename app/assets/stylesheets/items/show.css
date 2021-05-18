@@ -203,6 +203,7 @@
   padding: 10px;
   border: solid 2px #dedede;
   resize: none;
+  /*text-overflow: ellipsis;*/
 }
 
 .comment-flag {
