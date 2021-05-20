@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-    @user = @comment.user.nickname
+    @user = @comment.user
     ActionCable.server.broadcast 'comment_channel', { content: @comment, comment_user: @user } if @comment.save
   end
 

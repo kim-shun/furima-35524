@@ -32,6 +32,17 @@ crumb :registrations do
   parent :root
 end
 
+crumb :user_show do
+  link "出品商品一覧ページ", user_path
+  parent :root
+end
+
+crumb :cards do
+  link "カード登録ページ", new_card_path
+  parent :root
+end
+
+
 
 # crumb :projects do
 #   link "Projects", projects_path

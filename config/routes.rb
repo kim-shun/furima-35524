@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'cards/new'
   get 'comments/new'
   devise_for :users
   root to: 'items#index'
@@ -6,4 +7,6 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :create]
     resources :comments, only: [:create]
   end
+   resources :users, only: [:show, :update]
+   resources :cards, only: [:new, :create]
 end
