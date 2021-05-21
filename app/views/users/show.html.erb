@@ -1,20 +1,43 @@
-<% if user_signed_in? && current_user.nickname == @nickname %>
-<%= link_to "マイページ設定", new_card_path(current_user), id: "setting" %>
-<% end %>
+<%= render "shared/second-header"%>
+<%# if user_signed_in? && current_user.nickname == @nickname %>
+<%#= link_to "マイページ設定", new_card_path(current_user), id: "setting" %>
+<%# end %>
 
-<%= form_with model: @user, url: user_path, class: 'registration-main', local: true do |f| %>
-
-<div class='form-wrap'>
-  <div class='form-header'>
-    <h1 class='form-header-text'>
-      会員情報入力
-    </h1>
-  </div>
-
-  
-  <%#= render 'shared/error_messages', model: f.object %>
-  
-  <div class="form-group">
+<%= form_for(current_user) do |f| %>
+<%= render 'shared/error_messages', model: f.object %>
+  <% if @card.present? %>
+    <div class='credit-card-form'>
+        <h1 class='info-input-haedline'>
+          クレジットカード情報入力
+        </h1>
+        <div class="form-group">
+          <div class='form-text-wrap'>
+            <label class="form-text">カード情報</label>
+            <span class="indispensable">必須</span>
+          </div>
+          <%= "**** **** **** " + @card[:last4] %>
+          <div class='available-card'>
+            <%= image_tag 'card-visa.gif', class: 'card-logo'%>
+            <%= image_tag 'card-mastercard.gif', class: 'card-logo'%>
+            <%= image_tag 'card-jcb.gif', class: 'card-logo'%>
+            <%= image_tag 'card-amex.gif', class: 'card-logo'%>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class='form-text-wrap'>
+            <label class="form-text">有効期限</label>
+            <span class="indispensable">必須</span>
+          </div>
+          <div class='input-expiration-date-wrap'>
+            <%= @card[:exp_month] %>
+            <p>月</p>
+            <%= @card[:exp_year] %>
+            <p>年</p>
+          </div>
+        </div> 
+    </div>
+  <% end %>
+    <div class="form-group">
     <div class='form-text-wrap'>
       <label class="form-text">ニックネーム</label>
       <span class="indispensable">必須</span>
@@ -27,21 +50,6 @@
       <span class="indispensable">必須</span>
     </div>
     <%= f.email_field :email, class:"input-default", id:"email", placeholder:"PC・携帯どちらでも可", autofocus: true %>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">パスワード</label>
-      <span class="indispensable">必須</span>
-    </div>
-    <%= f.password_field :password, class:"input-default", id:"password", placeholder:"6文字以上の半角英数字" %>
-    <p class='info-text'>※英字と数字の両方を含めて設定してください</p>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">パスワード(確認)</label>
-      <span class="indispensable">必須</span>
-    </div>
-    <%= f.password_field :password_confirmation, class:"input-default", id:"password-confirmation", placeholder:"同じパスワードを入力して下さい" %>
   </div>
   <div class="form-group">
     <p class='form-info-header'>
@@ -89,76 +97,16 @@
                     date_separator: '%s'),
                   "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
     </div>
-    <p class='info-text'>※ 本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。</p>
+    <p class='info-text'>※ 本人情報は正しく入力してください。</p>
   </div>
   <div class="form-group">
-    <h2 class='form-bottom-text'>
-      「会員登録」のボタンを押すことにより、
-      <span>利用規約</span>
-      <br>に同意したものとみなします
-    </h2>
-  </div>
-  <div class='register-btn'>
-    <%= f.submit "更新" ,class:"register-red-btn" %>
-  </div>
-  <p class='register-info'>本人情報の登録について</p>
-</div>
-<% end %>
-
-<p class="user-show"><%= @nickname %>さんの出品商品一覧</p>
-<% @items.each do |item| %>
-   <div class="item-show">
-  <div class="item-box">
-    <h2 class="name">
-      <%= item.name %>
-    </h2>
-    <div class="item-img-content-show">
-      
-      <% item.images.each do |image| %>
-        <%= image_tag image, class:'item-box-img' %>
-      <% end %>
-
-      <% if item.order.present? %>
-      <div class="sold-out-show">
-        <span>Sold Out!!</span>
-      </div>
-      <% end %>
-      
+    <div class='register-btn'>
+      <%= f.submit "会員情報更新" ,class:"register-red-btn" %>
     </div>
-    <div class="item-price-box">
-      <span class="item-price">
-        <%= item.price %>
-      </span>
-      <span class="item-postage">
-        <%= item.shipping_fee_status.name %>
-      </span>
-    </div>
-
-    <table class="detail-table">
-      <tbody>
-        <tr>
-          <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= item.category.name %></td>
-        </tr>
-        <tr>
-          <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= item.sales_status.name %></td>
-        </tr>
-        <tr>
-          <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= item.shipping_fee_status.name %></td>
-        </tr>
-        <tr>
-          <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= item.prefecture.name %></td>
-        </tr>
-        <tr>
-          <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= item.scheduled_delivery.name %></td>
-        </tr>
-      </tbody>
-    </table>
+    <br>
+  </div>
 <% end %>
+<%= render "shared/second-footer"%>
 <% breadcrumb :user_show %>
 
 

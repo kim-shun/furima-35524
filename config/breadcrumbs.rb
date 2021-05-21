@@ -33,7 +33,7 @@ crumb :registrations do
 end
 
 crumb :user_show do
-  link "出品商品一覧ページ", user_path
+  link "マイページ", user_path
   parent :root
 end
 
