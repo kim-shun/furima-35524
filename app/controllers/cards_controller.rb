@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
   def new
-    @card = Card.new
+    #@card = Card.new
     session[:previous_url] = request.referer
   end
 
@@ -11,13 +11,13 @@ class CardsController < ApplicationController
       card: params[:card_token]
     )
 
-    @card = Card.new(
+    card = Card.new(
       card_token: params[:card_token],
       customer_token: customer.id,
       user_id: current_user.id
     )
 
-    if @card.save
+    if card.save
       redirect_to session[:previous_url]
     else
       render :new
