@@ -7,6 +7,6 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :create]
     resources :comments, only: [:create]
   end
-   resources :users, only: [:show, :update]
+   resources :users, only: :show
    resources :cards, only: [:new, :create]
 end

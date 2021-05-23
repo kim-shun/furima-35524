@@ -34,11 +34,11 @@
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with model: [@item, @order_address], url: item_orders_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+  <%= form_with model: [@item, @order_address], url: item_orders_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
     <%= render 'shared/error_messages', model: f.object %>
     <%# カード情報の入力 %>
     <% if @card.present? %>
-      <div class='credit-card-form'>
+      <div class='credit-card-form', id="save_card">
         <h1 class='info-input-haedline'>
           クレジットカード情報入力
         </h1>
@@ -47,7 +47,7 @@
             <label class="form-text">カード情報</label>
             <span class="indispensable">必須</span>
           </div>
-          <%= "**** **** **** " + @card[:last4] %>
+          <%= "**** **** **** " + @card[:last4]  %>
           <div class='available-card'>
             <%= image_tag 'card-visa.gif', class: 'card-logo'%>
             <%= image_tag 'card-mastercard.gif', class: 'card-logo'%>
@@ -104,6 +104,9 @@
             <span class="indispensable">必須</span>
           </div>
           <%= f.text_field :cvc,class:"input-default", id:"card-cvc", placeholder:"カード背面4桁もしくは3桁の番号", maxlength:"4" %>
+        </div>
+        <div class='form-group'>
+          <label class="form-text"><%= link_to "クレジットカード登録", new_card_path %></label>
         </div>
       </div>
     <% end %>
@@ -163,7 +166,7 @@
     <div class='buy-btn'>
       <%= f.submit "購入" ,class:"buy-red-btn" %>
     </div>
-    <% end %>
+  <% end %>
   </div>
 </div>
 <%= render "shared/second-footer"%>

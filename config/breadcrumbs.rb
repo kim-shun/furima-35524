@@ -37,7 +37,7 @@ crumb :user_show do
   parent :root
 end
 
-crumb :cards do
+crumb :cards do 
   link "カード登録ページ", new_card_path
   parent :root
 end

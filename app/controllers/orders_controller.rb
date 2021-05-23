@@ -6,27 +6,31 @@ class OrdersController < ApplicationController
   def index
     @order = Order.new
     @order_address = OrderAddress.new
-
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # 環境変数を読み込む
-    card = Card.find_by(user_id: current_user.id) # ユーザーのid情報を元に、カード情報を取得
-
-    redirect_to new_card_path and return unless card.present?
-    
-    customer = Payjp::Customer.retrieve(card.customer_token) # 先程のカード情報を元に、顧客情報を取得
-    @card = customer.cards.first
+    #@address_params = Address_params.new
+    save_card
   end
 
   def create
     @order_address = OrderAddress.new(order_params)
-    if @order_address.valid?
-      pay_item
-      @order_address.save
-      redirect_to root_path
+    if save_card
+      @order_address.token = current_user.card.customer_token
+      if @order_address.valid?
+        pay_item
+        @order_address.save
+        redirect_to root_path
+      else
+        render 'orders/index'
+      end
     else
-      render 'orders/index'
+      if @order_address.valid?
+        pay_item
+        @order_address.save
+        redirect_to root_path
+      else
+        render 'orders/index'
+      end
     end
   end
-
   private
 
   def order_params
@@ -43,12 +47,32 @@ class OrdersController < ApplicationController
     redirect_to root_path if current_user.id == @item.user.id || @item.order.present?
   end
 
+  def save_card
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    card = Card.find_by(user_id: current_user.id)
+
+    if card.present?
+      customer = Payjp::Customer.retrieve(card.customer_token)
+      @card = customer.cards.first
+    end
+  end
+
   def pay_item
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    Payjp::Charge.create(
-      amount: @item.price,
-      card: order_params[:token],
-      currency: 'jpy'
-    )
+    if @card.present?
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      customer_token = current_user.card.customer_token
+      Payjp::Charge.create(
+        amount: @item.price,
+        customer: customer_token,
+        currency: 'jpy'
+      )
+    else
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+      Payjp::Charge.create(
+        amount: @item.price,
+        card: order_params[:token],
+        currency: 'jpy'
+      )
+    end
   end
 end

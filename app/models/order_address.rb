@@ -11,12 +11,13 @@ class OrderAddress
     validates :phone_number, numericality: { only_integer: true }
     validates :token
   end
+  
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :phone_number, length: { minimum: 10, maximum: 11 }
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
-
+    
     Address.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, address: address, building: building,
                    phone_number: phone_number, order_id: order.id, user_id: user_id, item_id: item_id)
   end
