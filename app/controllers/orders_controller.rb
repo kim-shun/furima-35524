@@ -6,7 +6,6 @@ class OrdersController < ApplicationController
   def index
     @order = Order.new
     @order_address = OrderAddress.new
-    #@address_params = Address_params.new
     save_card
   end
 
@@ -21,16 +20,15 @@ class OrdersController < ApplicationController
       else
         render 'orders/index'
       end
+    elsif @order_address.valid?
+      pay_item
+      @order_address.save
+      redirect_to root_path
     else
-      if @order_address.valid?
-        pay_item
-        @order_address.save
-        redirect_to root_path
-      else
-        render 'orders/index'
-      end
+      render 'orders/index'
     end
   end
+
   private
 
   def order_params
@@ -48,7 +46,7 @@ class OrdersController < ApplicationController
   end
 
   def save_card
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     card = Card.find_by(user_id: current_user.id)
 
     if card.present?
@@ -59,7 +57,7 @@ class OrdersController < ApplicationController
 
   def pay_item
     if @card.present?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       customer_token = current_user.card.customer_token
       Payjp::Charge.create(
         amount: @item.price,
