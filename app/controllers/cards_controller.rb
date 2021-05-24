@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
   def new
-    #@card = Card.new
+    # @card = Card.new
     session[:previous_url] = request.referer
   end
 
