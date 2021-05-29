@@ -65,3 +65,4 @@ gem 'payjp'
 gem "aws-sdk-s3", require: false
 
 gem "gretel"
+gem 'ransack'

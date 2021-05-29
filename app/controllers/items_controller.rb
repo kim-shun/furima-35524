@@ -1,10 +1,12 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:edit, :show, :update, :destroy]
-  before_action :move_to_index, except: [:index, :new, :create, :show]
+  before_action :move_to_index, except: [:index, :new, :create, :show, :search]
+  before_action :search_item, only: [:index, :search]
 
   def index
     @items = Item.all.order('created_at DESC')
+    set_item_column
   end
 
   def new
@@ -44,6 +46,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search
+    @results = @p.result.includes(:user)  # 検索条件にマッチした商品の情報を取得
+  end
+
   private
 
   def item_params
@@ -57,5 +63,14 @@ class ItemsController < ApplicationController
 
   def move_to_index
     redirect_to action: :index if current_user.id != @item.user.id || @item.order.present?
+  end
+
+  def search_item
+    @p = Item.ransack(params[:q])  # 検索オブジェクトを生成
+  end
+
+  def set_item_column
+    @item_name = Item.select("name").distinct  # 重複なくnameカラムのデータを取り出す
+    @item_info = Item.select("info").distinct
   end
 end
