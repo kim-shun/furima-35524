@@ -74,6 +74,6 @@ class ItemsController < ApplicationController
   end
 
   def set_item_column
-    @item_name = Item.select("name").distinct
+    @item_name = Item.select('name').distinct
   end
 end
