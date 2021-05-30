@@ -20,6 +20,9 @@
       <%= f.radio_button :price_lteq, '5000' %>
       5000円以下
       <br>
+      <%= f.label :category_id_eq, 'カテゴリー：' %>
+      <%= f.collection_select :category_id_eq, Category.where.not(id: 1), :id, :name, include_blank: "カテゴリー検索", include_blank: '指定なし' %>
+      <br>
       <%= f.submit "検索" %>
     <% end %>
 

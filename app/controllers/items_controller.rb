@@ -48,6 +48,8 @@ class ItemsController < ApplicationController
 
   def search
     @results = @p.result.includes(:user)  # 検索条件にマッチした商品の情報を取得
+    category_id = params[:q][:category_id_eq]
+    @category = Category.find_by(id: category_id)
   end
 
   private
@@ -66,11 +68,11 @@ class ItemsController < ApplicationController
   end
 
   def search_item
-    @p = Item.ransack(params[:q])  # 検索オブジェクトを生成
+    @p = Item.ransack(params[:q])
   end
 
   def set_item_column
-    @item_name = Item.select("name").distinct  # 重複なくnameカラムのデータを取り出す
+    @item_name = Item.select("name").distinct
     @item_info = Item.select("info").distinct
   end
 end
