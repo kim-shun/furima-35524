@@ -123,6 +123,35 @@
   <%# 商品一覧 %>
   <div class='item-contents'>
     <h2 class='title'>ピックアップカテゴリー</h2>
+    <br>
+    <%= search_form_for @p, url: items_search_path do |f| %>
+     <div class="search-detail">
+        <%= f.label :name_eq, '商品名：', class:"search-item" %>
+        <%= f.collection_select :name_eq, @item_name, :name, :name,  include_blank: '指定なし', class:"search-value" %>
+        <br>
+        <%= f.label :price, '価格：',class:"search-item" %>
+          <%= f.radio_button :price_lteq, '' %>
+          指定なし
+          <%= f.radio_button :price_lteq, '1000' %>
+          1000円以下
+          <%= f.radio_button :price_lteq, '2500' %>
+          2500円以下
+          <%= f.radio_button :price_lteq, '5000' %>
+          5000円以下
+        <br>
+        <%= f.label :category_id_eq, 'カテゴリー：', class:"search-item" %>
+        <%= f.collection_select :category_id_eq, Category.where.not(id: 1), :id, :name, include_blank: '指定なし', class:"search-value" %>
+        <br>
+        <%= f.label :prefecture_id_eq, '発送元の地域：', class:"search-item" %>
+        <%= f.collection_select :prefecture_id_eq, Prefecture.where.not(id: 1), :id, :name, include_blank: '指定なし', class:"search-value" %>
+        <br>
+      </div>
+      <div class="search-btn">
+        <%= f.submit "検索",  class: "btn", id: "search-btn" %>
+      </div>
+      <br>
+    <% end %>
+
     <%= link_to '新規投稿商品', user_session_path, class: "subtitle" %>
     <ul class='item-lists'>
 
