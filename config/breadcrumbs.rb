@@ -1,5 +1,5 @@
 crumb :root do
-  link "Home", root_path
+  link "トップページ", root_path
 end
 
 crumb :items_show do |item|
@@ -39,6 +39,11 @@ end
 
 crumb :cards do 
   link "カード登録ページ", new_card_path
+  parent :root
+end
+
+crumb :items_search do 
+  link "検索結果ページ", items_search_path
   parent :root
 end
 

@@ -236,3 +236,13 @@
   font-weight: bold;
   font-size: 23px;
 }
+
+.search-result{
+  font-size: 40px;
+}
+
+.no-result{
+  font-size: 30px;
+  margin-top: 20px;
+  color: #3CCACE;
+}
