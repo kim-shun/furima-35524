@@ -9,6 +9,8 @@ class Item < ApplicationRecord
   has_many_attached :images
   has_one :order
   has_many :comments
+  has_many :item_tag_relations
+  has_many :tags, through: :item_tag_relations
 
   with_options presence: true do
     validates :name
