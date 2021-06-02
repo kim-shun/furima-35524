@@ -10,13 +10,12 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = ItemsTag.new
+    @item = Item.new
   end
 
   def create
-    @item = ItemsTag.new(item_params)
-    if @item.valid?
-      @item.save
+    @item = Item.new(item_params)
+    if @item.save
       redirect_to root_path
     else
       render :new
@@ -24,11 +23,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    #@item_tag = @item.tags[0]
   end
 
   def update
-    if @item.update(update_item_params)
+    if @item.update(item_params)
       redirect_to item_path
     else
       render :edit
@@ -59,8 +57,8 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:items_tag).permit(:name, :info, :price, :category_id, :sales_status_id, :shipping_fee_status_id,
-                                 :prefecture_id, :scheduled_delivery_id, :tag_name, images: []).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :info, :price, :category_id, :sales_status_id, :shipping_fee_status_id,
+                                 :prefecture_id, :scheduled_delivery_id, images: []).merge(user_id: current_user.id)
   end
 
   def set_item
@@ -77,14 +75,5 @@ class ItemsController < ApplicationController
 
   def set_item_column
     @item_name = Item.select('name').distinct
-  end
-
-  def update_item_params
-    params.require(:item).permit(:name, :info, :price, :category_id, :sales_status_id, :shipping_fee_status_id,
-      :prefecture_id, :scheduled_delivery_id, images: []).merge(user_id: current_user.id)
-  end
-
-  def update_items_tag_params
-    params.require(:item).permit(:tag_name).merge(user_id: current_user.id)
   end
 end

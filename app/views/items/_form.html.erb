@@ -1,4 +1,4 @@
-
+<%= form_with model: item, local: true do |f| %>
 <%#url: items_path,%>
     
     <%= render 'shared/error_messages', model: f.object %>
@@ -14,7 +14,7 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :images, name: 'items_tag[images][]',  id:"item_image" %>
+        <%= f.file_field :images, name: 'item[images][]',  id:"item_image" %>
         <div id="image-list"></div>
       </div>
     </div>
@@ -33,12 +33,6 @@
           <span class="indispensable">必須</span>
         </div>
         <%= f.text_area :info, class:"items-text", id:"item-info", placeholder:"商品の説明（必須 1,000文字まで）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。" ,rows:"7" ,maxlength:"1000" %>
-      </div>
-      <div class="items-explain">
-        <div class="weight-bold-text">
-          商品のタグ
-        </div>
-        #<%= f.text_area :tag_name, class:"items-text", id:"item-info", placeholder:"商品のタグ" ,rows:"3" ,maxlength:"100" %>
       </div>
     </div>
     <%# /商品名と商品説明 %>
@@ -151,3 +145,4 @@
     </div>
    <% end %>
 
+<% end %>
