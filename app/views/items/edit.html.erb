@@ -7,12 +7,12 @@ app/assets/stylesheets/items/new.css %>
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
+    <%# [@item, @item_tag] %>
     <%= form_with model: @item, url: item_path, local: true do |f| %>
       <%= render partial: "form", locals: {f: f} %>
     <% end %>
   </div>
   
-
   <footer class="items-sell-footer">
     <ul class="menu">
       <li><a href="#">プライバシーポリシー</a></li>

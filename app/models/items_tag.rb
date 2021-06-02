@@ -34,5 +34,4 @@ class ItemsTag
 
     ItemTagRelation.create(item_id: item.id, tag_id: tag.id)
   end
-
 end
