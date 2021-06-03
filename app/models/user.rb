@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
-  
+
   has_many :sns_credentials
   has_many :items
   has_many :orders
@@ -33,7 +33,7 @@ class User < ApplicationRecord
 
     user = User.where(email: auth.info.email).first_or_initialize(
       nickname: auth.info.name,
-        email: auth.info.email
+      email: auth.info.email
     )
 
     if user.persisted?
