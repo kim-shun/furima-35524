@@ -1,5 +1,41 @@
 # README
 
+# アプリケーション名
+## furima-35524
+
+# URL
+https://furima-35524.herokuapp.com/
+
+# テスト用アカウント
+
+## Basic認証
+- ユーザー名： admin
+- パスワード： 2222
+
+## テストユーザー1
+- email : aaaa@aaaa
+- password : poki1poki
+
+## テストユーザー2
+- email : bbbb@bbbb
+- password : poki1poki
+
+
+# 追加した実装
+- プレビュー機能
+- 複数枚画像投稿機能
+- コメント機能
+- クレジットカード登録機能
+- パンくずリスト
+- 複雑な検索機能
+- マイページ
+- SNSアカウントでログイン
+- AWSのサーバーの利用
+- ボタンの変色
+
+
+
+
 # テーブル設計
 
 ## users テーブル
@@ -94,3 +130,14 @@
 
 ## Association
 - belongs_to :user
+
+
+# ローカルでの動作方法
+
+- % git clone https://github.com/kim-shun/furima-35524.git  
+- % cd morning-routine
+- % bundle install
+- % rails db:create
+- % rails db:migrate
+- % rails s
+- → http://localhost:3000
