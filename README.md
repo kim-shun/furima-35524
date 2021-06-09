@@ -21,17 +21,45 @@ https://furima-35524.herokuapp.com/
 - password : poki1poki
 
 
+# 基本機能
+- ユーザー管理機能
+- 商品出品機能
+- 商品一覧表示機能
+- 商品詳細表示機能
+- 商品情報編集機能
+- 商品削除機能
+- 商品購入機能
+- S3の導入
+
 # 追加した実装
-- プレビュー機能
-- 複数枚画像投稿機能
-- コメント機能
-- クレジットカード登録機能
-- パンくずリスト
-- 複雑な検索機能
-- マイページ
-- SNSアカウントでログイン
-- AWSのサーバーの利用
-- ボタンの変色
+## プレビュー機能 & 複数枚画像投稿機能
+- 商品出品時
+[![Image from Gyazo](https://i.gyazo.com/c6eb4682da226d2fde80b59ba0fb60e2.gif)](https://gyazo.com/c6eb4682da226d2fde80b59ba0fb60e2)
+- 商品詳細ページ
+[![Image from Gyazo](https://i.gyazo.com/28c85b74d480440219d6bb557ee46382.gif)](https://gyazo.com/28c85b74d480440219d6bb557ee46382)
+## コメント機能
+[![Image from Gyazo](https://i.gyazo.com/021ebee4c256de2bc37383ff440f4c65.gif)](https://gyazo.com/021ebee4c256de2bc37383ff440f4c65)
+## クレジットカード登録機能
+- 登録画面に遷移
+[![Image from Gyazo](https://i.gyazo.com/37d521f6409b13eaecd523f27edab1e8.gif)](https://gyazo.com/37d521f6409b13eaecd523f27edab1e8)
+- 登録されたカードの表示
+[![Image from Gyazo](https://i.gyazo.com/a15739a6e96c0df972574d1620572728.gif)](https://gyazo.com/a15739a6e96c0df972574d1620572728)
+- 登録されたカードで購入
+[![Image from Gyazo](https://i.gyazo.com/af6cd455bce5fe486592cc05b4559c12.gif)](https://gyazo.com/af6cd455bce5fe486592cc05b4559c12)
+- カードを登録せずに購入
+[![Image from Gyazo](https://i.gyazo.com/96a74b230e41ab49b514d548ae198265.gif)](https://gyazo.com/96a74b230e41ab49b514d548ae198265)
+## パンくずリスト
+[![Image from Gyazo](https://i.gyazo.com/f68a57584ccd6f7f14ee91b5b8acfee3.gif)](https://gyazo.com/f68a57584ccd6f7f14ee91b5b8acfee3)
+## 複雑な検索機能 & ボタンの変色
+[![Image from Gyazo](https://i.gyazo.com/4c5673e6d25e09251ec2663ab3b3f107.gif)](https://gyazo.com/4c5673e6d25e09251ec2663ab3b3f107)
+## マイページ
+[![Image from Gyazo](https://i.gyazo.com/e0fe409bab1d7bc7a42196b07465d43f.gif)](https://gyazo.com/e0fe409bab1d7bc7a42196b07465d43f)
+## SNSアカウントでログイン
+[![Image from Gyazo](https://i.gyazo.com/78638b3d35dfe78ae1021909f436913d.gif)](https://gyazo.com/78638b3d35dfe78ae1021909f436913d)
+<br>
+- AWSのサーバーの利用も追加済み
+
+
 
 
 
