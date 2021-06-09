@@ -6,21 +6,26 @@ class OrdersController < ApplicationController
   def index
     @order = Order.new
     @order_address = OrderAddress.new
-    save_card
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    card = Card.find_by(user_id: current_user.id)
+
+    if card.present?
+      customer = Payjp::Customer.retrieve(card.customer_token)
+      @card = customer.cards.first
+    end
   end
 
   def create
     @order_address = OrderAddress.new(order_params)
-    if save_card
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    card = Card.find_by(user_id: current_user.id)
+    if card.present?
+      customer = Payjp::Customer.retrieve(card.customer_token)
+      @card = customer.cards.first
       @order_address.token = current_user.card.customer_token
-      if @order_address.valid?
-        pay_item
-        @order_address.save
-        redirect_to root_path
-      else
-        render 'orders/index'
-      end
-    elsif @order_address.valid?
+    end
+
+    if @order_address.valid?
       pay_item
       @order_address.save
       redirect_to root_path
@@ -43,16 +48,6 @@ class OrdersController < ApplicationController
 
   def move_to_index
     redirect_to root_path if current_user.id == @item.user.id || @item.order.present?
-  end
-
-  def save_card
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    card = Card.find_by(user_id: current_user.id)
-
-    if card.present?
-      customer = Payjp::Customer.retrieve(card.customer_token)
-      @card = customer.cards.first
-    end
   end
 
   def pay_item
