@@ -39,6 +39,31 @@ describe ItemsController, type: :request do
       expect(response.body).to include(@item.user.nickname)
     end
 
-    #カテゴリー以降とコメントもある
+    it 'showアクションにリクエストするとレスポンスにカテゴリーが存在する' do
+      get item_path(@item)
+      expect(response.body).to include(@item.category.name)
+    end
+
+    it 'showアクションにリクエストするとレスポンスに商品の状態が存在する' do
+      get item_path(@item)
+      expect(response.body).to include(@item.sales_status.name)
+    end
+
+    it 'showアクションにリクエストするとレスポンスに配送料の負担が存在する' do
+      get item_path(@item)
+      expect(response.body).to include(@item.shipping_fee_status.name)
+    end
+
+    it 'showアクションにリクエストするとレスポンスに発送元の地域が存在する' do
+      get item_path(@item)
+      expect(response.body).to include(@item.prefecture.name)
+    end
+
+    it 'showアクションにリクエストするとレスポンスに発送日の目安が存在する' do
+      get item_path(@item)
+      expect(response.body).to include(@item.scheduled_delivery.name)
+    end
+
+    #コメントもある
   end 
 end
