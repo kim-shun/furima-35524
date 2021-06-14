@@ -10,5 +10,8 @@ FactoryBot.define do
     password = 'a1' + Faker::Internet.password(min_length: 6)
     password { password }
     password_confirmation { password }
+    # birth_date_1i { Faker::Number.between(from: 2, to: 88) }
+    # birth_date_2i { Faker::Number.between(from: 2, to: 13) }
+    # birth_date_3i { Faker::Number.between(from: 2, to: 32) }
   end
 end
