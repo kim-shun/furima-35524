@@ -41,9 +41,9 @@ https://furima-35524.herokuapp.com/
 [![Image from Gyazo](https://i.gyazo.com/021ebee4c256de2bc37383ff440f4c65.gif)](https://gyazo.com/021ebee4c256de2bc37383ff440f4c65)
 ## クレジットカード登録機能
 - 登録画面に遷移
-[![Image from Gyazo](https://i.gyazo.com/37d521f6409b13eaecd523f27edab1e8.gif)](https://gyazo.com/37d521f6409b13eaecd523f27edab1e8)
+[![Image from Gyazo](https://i.gyazo.com/313d03014bdc490627bfd3df64055673.gif)](https://gyazo.com/313d03014bdc490627bfd3df64055673)
 - 登録されたカードの表示
-[![Image from Gyazo](https://i.gyazo.com/a15739a6e96c0df972574d1620572728.gif)](https://gyazo.com/a15739a6e96c0df972574d1620572728)
+[![Image from Gyazo](https://i.gyazo.com/846027342eb8e9622b9ed6f2bdca6bc6.gif)](https://gyazo.com/846027342eb8e9622b9ed6f2bdca6bc6)
 - 登録されたカードで購入
 [![Image from Gyazo](https://i.gyazo.com/af6cd455bce5fe486592cc05b4559c12.gif)](https://gyazo.com/af6cd455bce5fe486592cc05b4559c12)
 - カードを登録せずに購入
