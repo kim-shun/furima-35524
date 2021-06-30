@@ -4,7 +4,6 @@ class OrdersController < ApplicationController
   before_action :move_to_index
 
   def index
-    @order = Order.new
     @order_address = OrderAddress.new
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     card = Card.find_by(user_id: current_user.id)
